@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { getSearchBooks } from "../../../../api/book";
 import Button from "@/components/Button";
@@ -46,7 +44,7 @@ export default function SearchModal() {
 
       <Button
         title="책 등록"
-        className="text-sm bg-blue-400 px-2 py-1 rounded font-bold text-white"
+        variant="primary"
         onClick={() => setIsOpenSearchModal(true)}
       />
 
@@ -63,11 +61,7 @@ export default function SearchModal() {
                 {...register("keyword")}
               />
 
-              <Button
-                type="submit"
-                className="w-full mt-2 text-sm rounded bg-black text-white px-2 py-2 transition hover:bg-[#444]"
-                title="검색"
-              />
+              <Button type="submit" variant="primary" title="검색" />
             </div>
           </form>
 
@@ -104,7 +98,7 @@ export default function SearchModal() {
                         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[rgba(255,255,255,0.7)]">
                           <Button
                             title="선택"
-                            className="bg-blue-500 px-10 py-1 text-sm text-white rounded font-bold transition active:bg-blue-700 hover:bg-blue-600"
+                            variant="primary"
                             onClick={() => {
                               setIsOpenRegisterModal(true);
                               setSelectItem(item);

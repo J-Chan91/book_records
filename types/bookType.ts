@@ -26,3 +26,5 @@ export type RecordType = {
   total_page: number;
   current_page: number;
 } & BookType;
+
+export type AddRecordType = Omit<RecordType, "id">;

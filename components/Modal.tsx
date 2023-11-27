@@ -19,7 +19,10 @@ export default function Modal({
   return createPortal(
     <div className="fixed left-0 top-0 bg-[rgba(255,255,255,0.5)] w-full h-full">
       <dialog
-        className={cn("fixed top-2 left-0 rounded-md", className)}
+        className={cn(
+          "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 left-1/2 rounded-md",
+          className
+        )}
         {...rest}
       >
         <div className="flex justify-between items-center bg-white">

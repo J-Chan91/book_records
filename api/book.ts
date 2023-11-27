@@ -1,25 +1,24 @@
 import axios from "axios";
-import { NaverBooksType, RecordsType } from "@/types/bookType";
+import { AddRecordType, NaverBooksType, RecordsType } from "@/types/bookType";
+import { server } from "./common";
 
-export const getRecords = async (): Promise<RecordsType | undefined> => {
-  return axios
-    .get("http://localhost:3030/records")
-    .then((res) => {
-      if (res.status === 400) {
-        return res.data;
-      } else {
-        return undefined;
-      }
-    })
-    .catch((err) => {
-      console.log("ERROR ");
-      return undefined;
-    });
+export const getRecords = async (): Promise<undefined | RecordsType> => {
+  try {
+    const res = await server.get("/records");
+
+    if (res.status === 200) {
+      return res.data;
+    }
+
+    return undefined;
+  } catch (err) {
+    return undefined;
+  }
 };
 
 export const getSearchBooks = async (
   keyword: string
-): Promise<NaverBooksType | undefined> => {
+): Promise<undefined | NaverBooksType> => {
   if (
     !process.env.NEXT_PUBLIC_NAVER_CLIENT_ID ||
     !process.env.NEXT_PUBLIC_NAVER_CLIENT_SECRET
@@ -42,4 +41,16 @@ export const getSearchBooks = async (
     .catch((err) => {
       return undefined;
     });
+};
+
+export const postRecord = async (
+  form: AddRecordType
+): Promise<undefined | boolean> => {
+  const result = await server.post("/records", form);
+
+  if (result.status === 201 && result.statusText === "Created") {
+    return true;
+  }
+
+  return false;
 };
