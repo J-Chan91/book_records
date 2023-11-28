@@ -1,20 +1,11 @@
 import axios from "axios";
-import { AddRecordType, NaverBooksType, RecordsType } from "@/types/bookType";
+import {
+  AddRecordType,
+  NaverBooksType,
+  RecordType,
+  RecordsType,
+} from "@/types/bookType";
 import { server } from "./common";
-
-export const getRecords = async (): Promise<undefined | RecordsType> => {
-  try {
-    const res = await server.get("/records");
-
-    if (res.status === 200) {
-      return res.data;
-    }
-
-    return undefined;
-  } catch (err) {
-    return undefined;
-  }
-};
 
 export const getSearchBooks = async (
   keyword: string
@@ -41,6 +32,20 @@ export const getSearchBooks = async (
     .catch((err) => {
       return undefined;
     });
+};
+
+export const getRecords = async (): Promise<undefined | RecordType[]> => {
+  try {
+    const res = await server.get("/records");
+
+    if (res.status === 200) {
+      return res.data;
+    }
+
+    return undefined;
+  } catch (err) {
+    return undefined;
+  }
 };
 
 export const postRecord = async (

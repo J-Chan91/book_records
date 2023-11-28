@@ -6,7 +6,7 @@ import { getSearchBooks } from "../../../../api/book";
 import Button from "@/components/Button";
 import { BookType } from "@/types/bookType";
 import Modal from "@/components/Modal";
-import RegisterBookModal from "../RegisterBookModal";
+import RegisterBookModal from "../registerBookModal";
 import ImageSection from "./ImageSection";
 
 type FormType = {

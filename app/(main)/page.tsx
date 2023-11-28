@@ -1,6 +1,7 @@
-import SearchModal from "./_components/SearchModal";
+import SearchModal from "./_components/searchModal";
 import ProgressBar from "@/components/ProgressBar";
 import { getRecords } from "@/api/book";
+import RecordsSection from "./_components/recordsSection";
 
 export default async function Home() {
   const records = await getRecords();
@@ -9,12 +10,8 @@ export default async function Home() {
     <main className="bg-white w-full h-screen p-4">
       <SearchModal />
 
-      <div className="w-full">
-        <ProgressBar percent={30} />
-      </div>
-
-      <div className="border my-4 w-full h-[90%] overflow-auto p-2">
-        <div className="h-[1500px] bg-red-50" />
+      <div className="my-4 w-full overflow-auto">
+        <RecordsSection list={records} />
       </div>
     </main>
   );
