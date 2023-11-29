@@ -1,6 +1,7 @@
 import ProgressBar from "@/components/ProgressBar";
 import { RecordType } from "@/types/bookType";
 import Image from "next/image";
+import Link from "next/link";
 import { Fragment } from "react";
 
 type Props = {
@@ -12,18 +13,19 @@ export default function RecordsSection({ list }: Props) {
       {!list ? (
         <div>책을 등록해보세요</div>
       ) : (
-        // <div className="flex gap-2">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="w-full xl:w-1/2 grid grid-cols-1 xl:grid-cols-2 gap-2">
           {list.map((item) => (
-            <div
+            <Link
               key={item.id}
-              className="flex rounded border border-gray-200 px-2 py-1 transition cursor-pointer hover:border-gray-400"
+              className=" bg-white w-full md:flex rounded border border-gray-200 px-2 py-1 transition cursor-pointer hover:border-gray-400"
+              href={`/${item.id}`}
             >
               <Image
                 src={item.image}
                 alt={item.title}
                 width={240}
-                height={300}
+                height={360}
+                style={{ objectFit: "contain" }}
                 className="mr-2"
               />
 
@@ -38,7 +40,7 @@ export default function RecordsSection({ list }: Props) {
 
                 <p className="text-sm my-2">{item.title}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

@@ -7,10 +7,10 @@ export default async function Home() {
   const records = await getRecords();
 
   return (
-    <main className="bg-white w-full h-screen p-4">
+    <main className="bg-white h-screen p-4">
       <SearchModal />
 
-      <div className="my-4 w-full overflow-auto">
+      <div className="my-4 flex justify-center overflow-auto">
         <RecordsSection list={records} />
       </div>
     </main>

@@ -17,10 +17,6 @@ export type BookType = {
   description: string;
 };
 
-export type RecordsType = {
-  items: RecordType[];
-};
-
 export type RecordType = {
   id: number;
   total_page: number;
