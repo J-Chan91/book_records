@@ -1,3 +1,4 @@
+import { FormEvent } from "react";
 import Image from "next/image";
 import { FormProvider, useForm } from "react-hook-form";
 import Input from "@/components/Input";
@@ -5,7 +6,6 @@ import Modal from "@/components/Modal";
 import { BookType } from "@/types/bookType";
 import Button from "@/components/Button";
 import { postRecord } from "@/api/book";
-import { ChangeEvent, FormEvent } from "react";
 
 const ONLY_NUBMER_REGEX = /^[0-9]+$/;
 

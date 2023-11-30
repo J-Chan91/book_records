@@ -67,13 +67,30 @@ export const postRecord = async (
   form: AddRecordType
 ): Promise<undefined | boolean> => {
   try {
-    const result = await server.post("/records", form);
+    const res = await server.post("/records", form);
 
-    if (result.status === 201) {
+    if (res.status === 201) {
       return true;
     }
 
     return false;
+  } catch (err) {
+    return false;
+  }
+};
+
+export const patchCurrentPage = async (
+  id: string,
+  current_page: number
+): Promise<boolean> => {
+  try {
+    const res = await server.patch(`/records/${id}`, { current_page });
+
+    if (res.status === 200) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (err) {
     return false;
   }

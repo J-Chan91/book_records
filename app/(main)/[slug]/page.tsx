@@ -1,6 +1,7 @@
 import { getRecord } from "@/api/book";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
+import SummarySection from "./_components/summarySection";
 
 type Props = {
   params: { slug: string };
@@ -14,9 +15,11 @@ export default async function Page({ params: { slug } }: Props) {
       {!record ? (
         notFound()
       ) : (
-        <div className="bg-white w-full h-screen flex justify-center">
-          <div className="w-1/2 lg:flex gap-2">
-            <div className="w-full border rounded border-gray-200">{slug}</div>
+        <div className="bg-white py-10 w-full h-screen flex justify-center">
+          <div className="flex xl:flex-row flex-col p-0 w-full px-2 gap-2">
+            <div className="w-full border rounded border-gray-200">
+              <SummarySection record={record} />
+            </div>
 
             <div className="border w-full rounded border-gray-200">{slug}</div>
           </div>
