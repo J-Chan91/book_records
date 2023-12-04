@@ -1,5 +1,11 @@
 import axios from "axios";
-import { AddRecordType, NaverBooksType, RecordType } from "@/types/bookType";
+import {
+  AddRecordType,
+  CommentType,
+  CommentsType,
+  NaverBooksType,
+  RecordType,
+} from "@/types/bookType";
 import { server } from "./common";
 
 export const getSearchBooks = async (
@@ -65,12 +71,12 @@ export const getRecord = async (
 
 export const postRecord = async (
   form: AddRecordType
-): Promise<undefined | boolean> => {
+): Promise<number | boolean> => {
   try {
     const res = await server.post("/records", form);
 
     if (res.status === 201) {
-      return true;
+      return res.data.id;
     }
 
     return false;
@@ -91,6 +97,53 @@ export const patchCurrentPage = async (
     } else {
       return false;
     }
+  } catch (err) {
+    return false;
+  }
+};
+
+export const getComments = async (
+  id: string
+): Promise<undefined | CommentType[]> => {
+  try {
+    const res = await server.get(`/comments/${id}`);
+
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      return undefined;
+    }
+  } catch (err) {
+    return undefined;
+  }
+};
+
+export const postNewComment = async (form: CommentsType): Promise<boolean> => {
+  try {
+    const res = await server.post(`/comments`, form);
+
+    if (res.status === 201) {
+      return true;
+    }
+
+    return false;
+  } catch (err) {
+    return false;
+  }
+};
+
+export const postAddComment = async (
+  id: string,
+  form: CommentType
+): Promise<boolean> => {
+  try {
+    const res = await server.post(`/comments/${id}`, form);
+
+    if (res.status === 201) {
+      return true;
+    }
+
+    return false;
   } catch (err) {
     return false;
   }

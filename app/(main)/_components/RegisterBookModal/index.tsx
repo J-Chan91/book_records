@@ -3,23 +3,28 @@ import Image from "next/image";
 import { FormProvider, useForm } from "react-hook-form";
 import Input from "@/components/Input";
 import Modal from "@/components/Modal";
-import { BookType } from "@/types/bookType";
+import { BookType, CommentType, CommentsType } from "@/types/bookType";
 import Button from "@/components/Button";
-import { postRecord } from "@/api/book";
+import { postNewComment, postRecord } from "@/api/book";
 
 const ONLY_NUBMER_REGEX = /^[0-9]+$/;
 
 type FormType = {
-  total_page: number;
-  current_page: number;
+  total_page: string;
+  current_page: string;
 };
 
 type Props = {
-  onClose: () => void;
   book: null | BookType;
+  onClose: () => void;
+  onAddRecord: () => void;
 };
 
-export default function RegisterBookModal({ book, onClose }: Props) {
+export default function RegisterBookModal({
+  book,
+  onClose,
+  onAddRecord,
+}: Props) {
   const methods = useForm<FormType>();
   const {
     handleSubmit,
@@ -31,9 +36,34 @@ export default function RegisterBookModal({ book, onClose }: Props) {
       return false;
     }
 
-    const result = await postRecord({ ...form, ...book });
+    const { total_page, current_page } = form;
 
-    console.log(result);
+    if (parseInt(total_page) < parseInt(current_page)) {
+      alert("읽은 페이지가 전체 페이지 보다 클 수 없어요");
+      return;
+    }
+
+    const data = {
+      total_page: parseInt(total_page),
+      current_page: parseInt(current_page),
+    };
+
+    const res = await postRecord({ ...data, ...book });
+
+    if (res !== false && typeof res === "number") {
+      const newComment: CommentsType = {
+        id: res,
+        items: [],
+      };
+
+      const isCeateComment = await postNewComment(newComment);
+
+      if (isCeateComment) {
+        alert("책이 등록되었어요");
+        onAddRecord();
+        onClose();
+      }
+    }
   };
 
   const changeIpt = (e: FormEvent<HTMLInputElement>) => {
@@ -63,7 +93,7 @@ export default function RegisterBookModal({ book, onClose }: Props) {
 
               <div className="flex justify-end w-full">
                 <Button
-                  variant="secondary"
+                  variant="primary"
                   title="등록"
                   type="submit"
                   disabled={!isValid}

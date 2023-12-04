@@ -13,7 +13,11 @@ type FormType = {
   keyword: string;
 };
 
-export default function SearchModal() {
+type Props = {
+  onUpdateRecords: () => void;
+};
+
+export default function SearchModal({ onUpdateRecords }: Props) {
   const { register, handleSubmit } = useForm<FormType>();
 
   const [books, setBooks] = useState<undefined | BookType[]>(undefined);
@@ -33,12 +37,19 @@ export default function SearchModal() {
     }
   };
 
+  const addRecord = () => {
+    onUpdateRecords();
+    setIsOpenRegisterModal(false);
+    setIsOpenSearchModal(false);
+  };
+
   return (
     <>
       {isOpenRegisterModal && (
         <RegisterBookModal
           book={selectItem}
           onClose={() => setIsOpenRegisterModal(false)}
+          onAddRecord={addRecord}
         />
       )}
 

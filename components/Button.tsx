@@ -14,10 +14,10 @@ const VariantClassNames = {
   secondary: "bg-red-500 hover:bg-red-600 active:bg-red-700",
 };
 
-export default function Button({ title, variant, ...rest }: Props) {
+export default function Button({ title, variant, className, ...rest }: Props) {
   return (
     <button
-      className={cn(CommonClassNames, VariantClassNames[variant])}
+      className={cn(CommonClassNames, VariantClassNames[variant], className)}
       {...rest}
     >
       {title}

@@ -1,20 +1,42 @@
-import ProgressBar from "@/components/ProgressBar";
-import { RecordType } from "@/types/bookType";
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment } from "react";
+import ProgressBar from "@/components/ProgressBar";
+import { RecordType } from "@/types/bookType";
+import SearchModal from "../searchModal";
+import { getRecords } from "@/api/book";
 
 type Props = {
   list: undefined | RecordType[];
 };
 export default function RecordsSection({ list }: Props) {
+  const [records, setRecords] = useState<undefined | RecordType[]>([]);
+
+  const updateRecords = async () => {
+    const res = await getRecords();
+
+    if (res) {
+      setRecords(res);
+    }
+  };
+
+  useEffect(() => {
+    setRecords(list);
+  }, [list]);
+
   return (
-    <Fragment>
-      {!list ? (
+    <div className="my-4 flex flex-col justify-center gap-2 overflow-auto">
+      <div className="w-full">
+        <SearchModal onUpdateRecords={updateRecords} />
+      </div>
+
+      {!records ? (
         <div>책을 등록해보세요</div>
       ) : (
-        <div className="w-full xl:w-1/2 grid grid-cols-1 xl:grid-cols-2 gap-2">
-          {list.map((item) => (
+        <div className="w-full justify-center grid grid-cols-1 xl:grid-cols-2 gap-2">
+          {records.map((item) => (
             <Link
               key={item.id}
               className=" bg-white w-full md:flex rounded border border-gray-200 px-2 py-1 transition cursor-pointer hover:border-gray-400"
@@ -25,7 +47,6 @@ export default function RecordsSection({ list }: Props) {
                 alt={item.title}
                 width={240}
                 height={360}
-                style={{ objectFit: "contain" }}
                 className="mr-2"
               />
 
@@ -44,6 +65,6 @@ export default function RecordsSection({ list }: Props) {
           ))}
         </div>
       )}
-    </Fragment>
+    </div>
   );
 }

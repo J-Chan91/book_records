@@ -9,17 +9,23 @@ type Props = {
 export default function Input({
   title,
   name,
+  className,
   required = true,
   ...rest
 }: Props) {
   const { register } = useFormContext();
 
   return (
-    <label className={cn(title && "flex items-center justify-between")}>
+    <label
+      className={cn("w-full", title && "flex items-center justify-between")}
+    >
       {title && <p className="text-sm mr-1 whitespace-nowrap">{title}</p>}
 
       <input
-        className="w-full text-right outline-none text-sm rounded transition border border-gray-200 px-2 py-2 focus:border-gray-400"
+        className={cn(
+          "w-full text-right outline-none text-sm rounded transition border border-gray-200 px-2 py-2 focus:border-gray-400",
+          className
+        )}
         {...register(name ? name : "", { required })}
         {...rest}
       />

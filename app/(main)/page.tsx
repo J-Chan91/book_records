@@ -8,11 +8,7 @@ export default async function Home() {
 
   return (
     <main className="bg-white h-screen p-4">
-      <SearchModal />
-
-      <div className="my-4 flex justify-center overflow-auto">
-        <RecordsSection list={records} />
-      </div>
+      <RecordsSection list={records} />
     </main>
   );
 }
