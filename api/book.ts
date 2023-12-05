@@ -104,7 +104,7 @@ export const patchCurrentPage = async (
 
 export const getComments = async (
   id: string
-): Promise<undefined | CommentType[]> => {
+): Promise<undefined | CommentsType> => {
   try {
     const res = await server.get(`/comments/${id}`);
 

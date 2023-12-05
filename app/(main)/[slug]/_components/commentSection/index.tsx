@@ -2,17 +2,17 @@
 
 import Input from "@/components/Input";
 import NewComment from "./NewComment";
-import { CommentType } from "@/types/bookType";
+import { CommentType, CommentsType } from "@/types/bookType";
 import { useEffect, useState } from "react";
 import Comments from "./Comments";
 
 type Props = {
   id: string;
-  comments: undefined | CommentType[];
+  comments: undefined | CommentsType;
 };
 
 export default function CommentSection({ id, comments }: Props) {
-  const [list, setList] = useState<undefined | CommentType[]>(undefined);
+  const [list, setList] = useState<undefined | CommentsType>(undefined);
 
   useEffect(() => {
     setList(comments);
