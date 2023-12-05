@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { getSearchBooks } from "../../../../api/book";
 import Button from "@/components/Button";
-import { BookType } from "@/types/bookType";
+import { BookType, RecordType } from "@/types/bookType";
 import Modal from "@/components/Modal";
 import RegisterBookModal from "../registerBookModal";
 import ImageSection from "./ImageSection";
@@ -43,6 +43,11 @@ export default function SearchModal({ onUpdateRecords }: Props) {
     setIsOpenSearchModal(false);
   };
 
+  const clickItem = (item: BookType) => {
+    setIsOpenRegisterModal(true);
+    setSelectItem(item);
+  };
+
   return (
     <>
       {isOpenRegisterModal && (
@@ -62,21 +67,27 @@ export default function SearchModal({ onUpdateRecords }: Props) {
       {isOpenSearchModal && (
         <Modal
           className="p-2 w-full h-full flex sm:w-[70%] flex-col gap-2 overflow-auto sm:max-w-[70%] sm:max-h-[90%] shadow-md bg-white"
-          title="검색"
+          title="책 검색"
           onClose={() => setIsOpenSearchModal(false)}
         >
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-              <input
-                className="w-full mr-2 outline-none text-sm rounded transition border border-gray-200 px-2 py-2 focus:border-gray-400"
-                {...register("keyword")}
-              />
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col md:flex-row items-center gap-2"
+          >
+            <input
+              className="w-full outline-none text-sm rounded transition border border-gray-200 px-2 py-2 focus:border-gray-400"
+              {...register("keyword")}
+            />
 
-              <Button type="submit" variant="primary" title="검색" />
-            </div>
+            <Button
+              type="submit"
+              variant="primary"
+              title="검색"
+              className="whitespace-nowrap md:w-[10%] w-full h-full"
+            />
           </form>
 
-          {books === undefined && <div>undefilend</div>}
+          {books === undefined && <div />}
 
           {books && !books.length ? (
             <div>
@@ -88,36 +99,17 @@ export default function SearchModal({ onUpdateRecords }: Props) {
                 books.map((item) => (
                   <div
                     key={item.isbn}
-                    className="hover:border-gray-400 transition border border-gray-200 p-2 rounded flex items-center h-[300px]"
+                    className="hover:border-gray-400 transition border border-gray-200 p-2 rounded flex items-center h-[400px]"
                   >
                     <ImageSection
                       title={item.title}
                       image={item.image}
                       link={item.link}
+                      item={item}
+                      onClickItem={clickItem}
                     />
 
-                    <div
-                      className="relative w-full border cursor-default border-gray-200 rounded h-[250px] ml-2 p-2"
-                      onMouseEnter={() => {
-                        setHoverItem(item.isbn);
-                      }}
-                      onMouseLeave={() => {
-                        setHoverItem(null);
-                      }}
-                    >
-                      {hoverItem === item.isbn && (
-                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[rgba(255,255,255,0.7)]">
-                          <Button
-                            title="선택"
-                            variant="primary"
-                            onClick={() => {
-                              setIsOpenRegisterModal(true);
-                              setSelectItem(item);
-                            }}
-                          />
-                        </div>
-                      )}
-
+                    <div className="overflow-auto relative w-full border cursor-default border-gray-200 rounded h-[250px] ml-2 p-2">
                       <div className="h-full w-full py-1">
                         <p>
                           {item.title} - {item.author}

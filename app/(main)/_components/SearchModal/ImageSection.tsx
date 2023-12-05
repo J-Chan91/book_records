@@ -1,3 +1,5 @@
+import Button from "@/components/Button";
+import { BookType } from "@/types/bookType";
 import Image from "next/image";
 import Link from "next/link";
 import { RxOpenInNewWindow } from "react-icons/rx";
@@ -6,9 +8,17 @@ type Props = {
   image: string;
   title: string;
   link: string;
+  item: BookType;
+  onClickItem: (item: BookType) => void;
 };
 
-export default function ImageSection({ image, title, link }: Props) {
+export default function ImageSection({
+  image,
+  title,
+  link,
+  item,
+  onClickItem,
+}: Props) {
   return (
     <div className="flex flex-col gap-2">
       <Image src={image} alt={title} width={200} height={250} />
@@ -22,6 +32,13 @@ export default function ImageSection({ image, title, link }: Props) {
 
         <RxOpenInNewWindow />
       </Link>
+
+      <Button
+        className="text-sm"
+        title="선택"
+        variant="primary"
+        onClick={() => onClickItem(item)}
+      />
     </div>
   );
 }
