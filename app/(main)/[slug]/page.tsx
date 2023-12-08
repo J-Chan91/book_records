@@ -13,7 +13,6 @@ export default async function Page({ params: { slug } }: Props) {
   const record = await getRecord(slug);
   const comments = await getComments(slug);
 
-  console.log(">>>", comments);
   return (
     <Fragment>
       {!record ? (

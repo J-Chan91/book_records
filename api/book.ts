@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   AddRecordType,
   CommentType,
-  CommentsType,
   NaverBooksType,
   RecordType,
 } from "@/types/bookType";
@@ -102,7 +101,7 @@ export const patchCurrentPage = async (
 
 export const getComments = async (
   id: string
-): Promise<undefined | CommentsType> => {
+): Promise<undefined | CommentType[]> => {
   try {
     const res = await server.get(`/comments?record_id=${id}`);
 
@@ -122,8 +121,6 @@ export const postComment = async (
 ): Promise<boolean> => {
   try {
     const res = await server.post(`/comments`, form);
-
-    console.log("> . ", res);
 
     if (res.status === 201) {
       return true;

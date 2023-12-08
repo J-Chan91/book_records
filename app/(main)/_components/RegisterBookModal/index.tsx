@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FormProvider, useForm } from "react-hook-form";
 import Input from "@/components/Input";
 import Modal from "@/components/Modal";
-import { BookType, CommentType, CommentsType } from "@/types/bookType";
+import { BookType, CommentType } from "@/types/bookType";
 import Button from "@/components/Button";
 import { postRecord } from "@/api/book";
 

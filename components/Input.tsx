@@ -23,7 +23,7 @@ export default function Input({
 
       <input
         className={cn(
-          "w-full text-right outline-none text-sm rounded transition border border-gray-200 px-2 py-2 focus:border-gray-400",
+          "w-full text-right outline-none text-sm rounded transition border border-gray-200 px-2 py-2 read-only:text-gray-700 focus:border-gray-400",
           className
         )}
         {...register(name ? name : "", { required })}

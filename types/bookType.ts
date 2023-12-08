@@ -17,11 +17,6 @@ export type BookType = {
   description: string;
 };
 
-export type CommentsType = {
-  id: number;
-  items: CommentType[];
-};
-
 export type CommentType = {
   id: number;
   comment: string;
