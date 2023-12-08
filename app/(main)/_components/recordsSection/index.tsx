@@ -57,36 +57,47 @@ export default function RecordsSection({ list }: Props) {
             />
           </div>
         ) : (
-          <div className="w-full justify-center grid grid-cols-1 xl:grid-cols-2 gap-2">
-            {records.map((item) => (
-              <Link
-                key={item.id}
-                className=" bg-white w-full md:flex rounded border border-gray-200 px-2 py-1 transition cursor-pointer hover:border-gray-400"
-                href={`/${item.id}`}
-              >
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  width={240}
-                  height={360}
-                  className="mr-2"
-                />
+          <div className="w-full lg:w-1/2">
+            <div className="w-full mb-4">
+              <Button
+                title="책 등록"
+                variant="primary"
+                className="text-sm"
+                onClick={() => setIsOpenSearchModal(true)}
+              />
+            </div>
 
-                <div className="w-full pt-4">
-                  <ProgressBar
-                    percent={
-                      !item.current_page
-                        ? 0
-                        : Math.floor(
-                            (item.current_page / item.total_page) * 100
-                          )
-                    }
+            <div className="w-full justify-center grid grid-cols-1 xl:grid-cols-2 gap-2">
+              {records.map((item) => (
+                <Link
+                  key={item.id}
+                  className=" bg-white w-full md:flex rounded border border-gray-200 px-2 py-1 transition cursor-pointer hover:border-gray-400"
+                  href={`/${item.id}`}
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={240}
+                    height={360}
+                    className="mr-2"
                   />
 
-                  <p className="text-sm my-2">{item.title}</p>
-                </div>
-              </Link>
-            ))}
+                  <div className="w-full pt-4">
+                    <ProgressBar
+                      percent={
+                        !item.current_page
+                          ? 0
+                          : Math.floor(
+                              (item.current_page / item.total_page) * 100
+                            )
+                      }
+                    />
+
+                    <p className="text-sm my-2">{item.title}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         )}
       </div>

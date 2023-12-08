@@ -1,5 +1,3 @@
-import SearchModal from "./_components/searchModal";
-import ProgressBar from "@/components/ProgressBar";
 import { getRecords } from "@/api/book";
 import RecordsSection from "./_components/recordsSection";
 

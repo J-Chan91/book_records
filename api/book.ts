@@ -69,14 +69,12 @@ export const getRecord = async (
   }
 };
 
-export const postRecord = async (
-  form: AddRecordType
-): Promise<number | boolean> => {
+export const postRecord = async (form: AddRecordType): Promise<boolean> => {
   try {
     const res = await server.post("/records", form);
 
     if (res.status === 201) {
-      return res.data.id;
+      return true;
     }
 
     return false;
@@ -106,7 +104,7 @@ export const getComments = async (
   id: string
 ): Promise<undefined | CommentsType> => {
   try {
-    const res = await server.get(`/comments/${id}`);
+    const res = await server.get(`/comments?record_id=${id}`);
 
     if (res.status === 200) {
       return res.data;
@@ -118,26 +116,14 @@ export const getComments = async (
   }
 };
 
-export const postNewComment = async (form: CommentsType): Promise<boolean> => {
+export const postComment = async (
+  id: string,
+  form: Omit<CommentType, "id">
+): Promise<boolean> => {
   try {
     const res = await server.post(`/comments`, form);
 
-    if (res.status === 201) {
-      return true;
-    }
-
-    return false;
-  } catch (err) {
-    return false;
-  }
-};
-
-export const postAddComment = async (
-  id: string,
-  form: CommentType
-): Promise<boolean> => {
-  try {
-    const res = await server.post(`/comments/${id}`, form);
+    console.log("> . ", res);
 
     if (res.status === 201) {
       return true;

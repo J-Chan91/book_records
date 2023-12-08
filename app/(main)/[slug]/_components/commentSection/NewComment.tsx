@@ -3,7 +3,7 @@
 import { FormProvider, useForm } from "react-hook-form";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-// import { postComment } from "@/api/book";
+import { postComment } from "@/api/book";
 
 type FormType = {
   comment: string;
@@ -21,13 +21,15 @@ export default function NewComment({ id }: Prop) {
   } = methods;
 
   const submit = async (form: FormType) => {
-    // const res = await postComment(id, form);
-    // console.log(res);
+    const res = await postComment(id, { ...form, record_id: parseInt(id) });
   };
 
   return (
     <FormProvider {...methods}>
-      <form className="flex w-full gap-2" onSubmit={handleSubmit(submit)}>
+      <form
+        className="flex w-full gap-2 text-sm"
+        onSubmit={handleSubmit(submit)}
+      >
         <Input required name="comment" type="text" className="text-left" />
 
         <Button

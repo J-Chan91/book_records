@@ -25,6 +25,7 @@ export type CommentsType = {
 export type CommentType = {
   id: number;
   comment: string;
+  record_id: number;
 };
 
 export type RecordType = {

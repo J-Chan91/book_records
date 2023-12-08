@@ -1,9 +1,9 @@
-import { getComments, getRecord } from "@/api/book";
-import { notFound } from "next/navigation";
 import { Fragment } from "react";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { getComments, getRecord } from "@/api/book";
 import SummarySection from "./_components/summarySection";
 import CommentSection from "./_components/commentSection";
-import Link from "next/link";
 
 type Props = {
   params: { slug: string };
@@ -13,6 +13,7 @@ export default async function Page({ params: { slug } }: Props) {
   const record = await getRecord(slug);
   const comments = await getComments(slug);
 
+  console.log(">>>", comments);
   return (
     <Fragment>
       {!record ? (

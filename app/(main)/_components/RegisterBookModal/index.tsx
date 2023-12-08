@@ -5,7 +5,7 @@ import Input from "@/components/Input";
 import Modal from "@/components/Modal";
 import { BookType, CommentType, CommentsType } from "@/types/bookType";
 import Button from "@/components/Button";
-import { postNewComment, postRecord } from "@/api/book";
+import { postRecord } from "@/api/book";
 
 const ONLY_NUBMER_REGEX = /^[0-9]+$/;
 
@@ -50,19 +50,12 @@ export default function RegisterBookModal({
 
     const res = await postRecord({ ...data, ...book });
 
-    if (res !== false && typeof res === "number") {
-      const newComment: CommentsType = {
-        id: res,
-        items: [],
-      };
-
-      const isCeateComment = await postNewComment(newComment);
-
-      if (isCeateComment) {
-        alert("책이 등록되었어요");
-        onAddRecord();
-        onClose();
-      }
+    if (res) {
+      alert("책이 등록되었어요");
+      onAddRecord();
+      onClose();
+    } else {
+      alert("책을 등록하는데 실패했어요. 다시 시도해주세요");
     }
   };
 
