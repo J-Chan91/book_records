@@ -1,6 +1,5 @@
 "use client";
 
-import Input from "@/components/Input";
 import NewComment from "./NewComment";
 import { CommentType } from "@/types/bookType";
 import { useEffect, useState } from "react";

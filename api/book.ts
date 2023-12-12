@@ -40,7 +40,7 @@ export const getSearchBooks = async (
 
 export const getRecords = async (): Promise<undefined | RecordType[]> => {
   try {
-    const res = await server.get("/records");
+    const res = await server.get("/records?_sort=id&_order=desc");
 
     if (res.status === 200) {
       return res.data;
@@ -103,7 +103,9 @@ export const getComments = async (
   id: string
 ): Promise<undefined | CommentType[]> => {
   try {
-    const res = await server.get(`/comments?record_id=${id}`);
+    const res = await server.get(
+      `/comments?record_id=${id}&_sort=id&_order=desc`
+    );
 
     if (res.status === 200) {
       return res.data;
@@ -120,7 +122,7 @@ export const postComment = async (
   form: Omit<CommentType, "id">
 ): Promise<boolean> => {
   try {
-    const res = await server.post(`/comments`, form);
+    const res = await server.post(`/comments?`, form);
 
     if (res.status === 201) {
       return true;
