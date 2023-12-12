@@ -131,3 +131,20 @@ export const postComment = async (
     return false;
   }
 };
+
+export const patchComment = async (
+  id: string,
+  form: CommentType
+): Promise<boolean> => {
+  try {
+    const res = await server.patch(`/comments/${id}`, form);
+
+    if (res.status === 201) {
+      return true;
+    }
+
+    return false;
+  } catch (err) {
+    return false;
+  }
+};
