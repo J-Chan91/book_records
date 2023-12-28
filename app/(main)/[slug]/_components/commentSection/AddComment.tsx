@@ -26,10 +26,7 @@ export default function AddComment({ id }: Prop) {
 
   return (
     <FormProvider {...methods}>
-      <form
-        className="flex w-full gap-2 text-sm"
-        onSubmit={handleSubmit(submit)}
-      >
+      <form className="flex w-full gap-2" onSubmit={handleSubmit(submit)}>
         <Input required name="comment" type="text" className="text-left" />
 
         <Button
