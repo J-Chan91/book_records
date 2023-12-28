@@ -13,7 +13,7 @@ type Prop = {
   id: string;
 };
 
-export default function NewComment({ id }: Prop) {
+export default function AddComment({ id }: Prop) {
   const methods = useForm<FormType>();
   const {
     handleSubmit,

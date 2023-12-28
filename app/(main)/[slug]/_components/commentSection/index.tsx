@@ -1,8 +1,8 @@
 "use client";
 
-import NewComment from "./NewComment";
-import { CommentType } from "@/types/bookType";
 import { useEffect, useState } from "react";
+import { CommentType } from "@/types/bookType";
+import AddComment from "./AddComment";
 import Comments from "./Comments";
 
 type Props = {
@@ -20,7 +20,7 @@ export default function CommentSection({ id, comments }: Props) {
   return (
     <div className="w-full h-full">
       <div className="flex w-full flex-col gap-2 h-full p-2">
-        <NewComment id={id} />
+        <AddComment id={id} />
 
         <Comments list={list} />
       </div>

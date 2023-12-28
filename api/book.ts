@@ -141,7 +141,9 @@ export const patchComment = async (
   try {
     const res = await server.patch(`/comments/${id}`, form);
 
-    if (res.status === 201) {
+    console.log(res);
+
+    if (res.status === 200) {
       return true;
     }
 

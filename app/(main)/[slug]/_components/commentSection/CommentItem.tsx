@@ -66,7 +66,7 @@ export default function CommentItem({ item }: Props) {
 
             <Button
               title="저장"
-              variant="primary"
+              variant="edit"
               className="whitespace-nowrap"
               type="submit"
             />
