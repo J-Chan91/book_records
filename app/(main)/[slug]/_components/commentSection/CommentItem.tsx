@@ -70,6 +70,14 @@ export default function CommentItem({ item }: Props) {
               className="whitespace-nowrap"
               type="submit"
             />
+
+            <Button
+              title="취소"
+              variant="secondary"
+              className="whitespace-nowrap"
+              type="button"
+              onClick={() => setIsModify(false)}
+            />
           </form>
         </FormProvider>
       )}
