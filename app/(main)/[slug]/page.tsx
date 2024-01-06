@@ -18,7 +18,7 @@ export default async function Page({ params: { slug } }: Props) {
       {!record ? (
         notFound()
       ) : (
-        <div className="bg-white py-10 w-full h-screen px-2 justify-center">
+        <div className="bg-white p-4 w-full h-screen justify-center">
           <div className="mb-2">
             <Link
               href="/"

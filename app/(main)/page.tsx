@@ -5,7 +5,7 @@ export default async function Home() {
   const records = await getRecords();
 
   return (
-    <main className="bg-white h-screen p-4">
+    <main className="bg-white">
       <RecordsSection list={records} />
     </main>
   );
